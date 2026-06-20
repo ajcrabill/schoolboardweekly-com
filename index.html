@@ -432,7 +432,7 @@
       <span class="nav-logo">School Board Weekly</span>
       <ul class="nav-links">
         <li><a href="#this-issue">This Issue</a></li>
-        <li><a href="#past-issues">Archive</a></li>
+        <li><a href="/archive.html">Archive</a></li>
         <li><a href="#subscribe">Subscribe</a></li>
       </ul>
     </div>
@@ -502,10 +502,12 @@
     <div class="subscribe-callout" id="subscribe">
       <h2>Get this in your inbox every Monday morning.</h2>
       <p class="tagline">No ads. No fluff. Just governance.</p>
-      <form class="subscribe-form" onsubmit="return false;">
-        <input type="email" placeholder="your@email.com">
+      <form class="subscribe-form" id="sub-form" action="https://formspree.io/f/xayzdydv" method="POST">
+        <input type="hidden" name="form" value="schoolboardweekly-subscribe">
+        <input type="email" name="email" placeholder="your@email.com" required>
         <button type="submit">Subscribe Free</button>
       </form>
+      <div id="sub-success" style="display:none;color:rgba(255,255,255,0.8);font-size:0.9rem;padding-top:0.75rem;">&#x2713; You&rsquo;re subscribed. See you Monday.</div>
       <p class="subscribe-note">Unsubscribe anytime. We respect your inbox.</p>
     </div>
 
@@ -558,5 +560,15 @@
     </div>
   </footer>
 
+
+  <script>
+    var f=document.getElementById("sub-form");
+    if(f) f.addEventListener("submit",async function(e){
+      e.preventDefault();
+      var r=await fetch(f.action,{method:"POST",body:new FormData(f),headers:{"Accept":"application/json"}});
+      if(r.ok){f.style.display="none";document.getElementById("sub-success").style.display="block";}
+    });
+  </script>
 </body>
 </html>
+
