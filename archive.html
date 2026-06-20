@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — School Board Weekly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1A2744;
+      --yellow: #F2B705;
+      --bg: #FAFAF7;
+      --text: #1A1A1A;
+      --muted: #6B7280;
+      --border: #E5E4DF;
+      --white: #FFFFFF;
+      --light-navy: #2A3F6F;
+      --off-white: #F8F8F6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 62px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--navy);
+      padding: 3rem 2rem 2.75rem;
+      text-align: center;
+    }
+
+    .page-header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.65rem;
+    }
+
+    .page-header p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
+    }
+
+    /* ARCHIVE BODY */
+    .archive-body {
+      padding: 3.5rem 2rem 1rem;
+    }
+
+    .archive-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ISSUES TABLE */
+    .issues-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    .issues-table thead tr {
+      border-bottom: 2px solid var(--navy);
+    }
+
+    .issues-table th {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      padding: 0 1rem 0.75rem 0;
+      text-align: left;
+    }
+
+    .issues-table th:last-child { padding-right: 0; }
+
+    .issues-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+
+    .issues-table tbody tr:hover {
+      background: rgba(242,183,5,0.04);
+    }
+
+    .issues-table td {
+      padding: 1rem 1rem 1rem 0;
+      vertical-align: top;
+      font-size: 0.875rem;
+      color: var(--text);
+    }
+
+    .issues-table td:last-child { padding-right: 0; }
+
+    .issue-num {
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+
+    .issue-date {
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+
+    .issue-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    .issue-read-link {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+
+    .issue-read-link:hover { opacity: 0.7; }
+
+    .archive-note {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding: 1.25rem 0 3.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SUBSCRIBE CALLOUT */
+    .subscribe-callout {
+      background: var(--navy);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .subscribe-callout-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .subscribe-callout h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .subscribe-callout .tagline {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      color: var(--navy);
+      background: var(--white);
+    }
+
+    .subscribe-form input[type="email"]::placeholder { color: #aaa; }
+
+    .subscribe-form button {
+      background: var(--yellow);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.7rem 1.25rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .subscribe-form button:hover { opacity: 0.88; }
+
+    .subscribe-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.02em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--white);
+      padding: 2.25rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      opacity: 0.65;
+      line-height: 1.8;
+    }
+
+    footer p:first-child {
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1.1rem; }
+      .archive-body { padding: 2.5rem 1.25rem 1rem; }
+      .subscribe-callout { padding: 3rem 1.25rem; }
+      .subscribe-form { flex-direction: column; }
+      .issues-table th:nth-child(2),
+      .issues-table td:nth-child(2) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">School Board Weekly</a>
+      <ul class="nav-links">
+        <li><a href="/#this-issue">This Issue</a></li>
+        <li><a href="/archive.html">Archive</a></li>
+        <li><a href="/#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>All Issues</h1>
+      <p>Every issue of School Board Weekly, newest first.</p>
+    </div>
+  </div>
+
+  <div class="archive-body">
+    <div class="archive-inner">
+
+      <table class="issues-table">
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Date</th>
+            <th>Headline</th>
+            <th>Read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="issue-num">#3</td>
+            <td class="issue-date">June 20, 2026</td>
+            <td class="issue-headline">Boards Are Running Out of Time on AI</td>
+            <td><a href="issues/issue-003.html" class="issue-read-link">Read &rarr;</a></td>
+          </tr>
+          <tr>
+            <td class="issue-num">#2</td>
+            <td class="issue-date">June 9, 2026</td>
+            <td class="issue-headline">The Governance Data No One Is Collecting</td>
+            <td><a href="issues/issue-002.html" class="issue-read-link">Read &rarr;</a></td>
+          </tr>
+          <tr>
+            <td class="issue-num">#1</td>
+            <td class="issue-date">June 2, 2026</td>
+            <td class="issue-headline">Why School Boards Are Everyone's Problem Now</td>
+            <td><a href="issues/issue-001.html" class="issue-read-link">Read &rarr;</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="archive-note">New issues are published every Monday morning. Subscribe to get them in your inbox.</p>
+
+    </div>
+  </div>
+
+  <div class="subscribe-callout" id="subscribe">
+    <div class="subscribe-callout-inner">
+      <h2>Get this in your inbox every Monday morning.</h2>
+      <p class="tagline">No ads. No fluff. Just governance.</p>
+      <form class="subscribe-form" id="sub-form" action="https://formspree.io/f/xayzdydv" method="POST">
+        <input type="hidden" name="form" value="schoolboardweekly-subscribe">
+        <input type="email" name="email" placeholder="your@email.com" required>
+        <button type="submit">Subscribe Free</button>
+      </form>
+      <div id="sub-success" style="display:none;color:rgba(255,255,255,0.8);font-size:0.9rem;padding-top:0.75rem;">&#10003; You're subscribed. See you Monday.</div>
+      <p class="subscribe-note">Unsubscribe anytime. We respect your inbox.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>School Board Weekly &mdash; governance coverage that matters</p>
+    <p>&copy; 2026 School Board Weekly</p>
+  </footer>
+
+  <script>
+    document.getElementById('sub-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const r = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' } });
+      if (r.ok) { e.target.style.display='none'; document.getElementById('sub-success').style.display='block'; }
+    });
+  </script>
+
+</body>
+</html>
