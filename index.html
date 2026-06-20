@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Board Weekly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1A2744;
+      --white: #FFFFFF;
+      --yellow: #F2B705;
+      --light-navy: #2A3F6F;
+      --off-white: #F8F8F6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-logo span {
+      color: var(--yellow);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: opacity 0.15s;
+    }
+
+    .nav-links a:hover { opacity: 0.75; }
+
+    .nav-cta {
+      background: var(--yellow);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: opacity 0.15s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85 !important; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 2px;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      padding: 5rem 2rem 5.5rem;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-overline {
+      color: var(--yellow);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.80);
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 580px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.65;
+    }
+
+    .btn-yellow {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    .btn-yellow:hover { opacity: 0.88; }
+
+    /* ARCHIVE */
+    .archive {
+      background: var(--off-white);
+      padding: 4.5rem 2rem;
+    }
+
+    .archive-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 2.5rem;
+    }
+
+    .issue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .issue-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      border-top: 3px solid var(--yellow);
+    }
+
+    .issue-meta {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light-navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .issue-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 0.85rem;
+    }
+
+    .issue-preview {
+      font-size: 0.875rem;
+      color: #555;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .issue-link {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+      padding-bottom: 1px;
+      align-self: flex-start;
+      transition: opacity 0.15s;
+    }
+
+    .issue-link:hover { opacity: 0.7; }
+
+    /* ABOUT */
+    .about {
+      background: var(--light-navy);
+      color: var(--white);
+      padding: 4.5rem 2rem;
+      text-align: center;
+    }
+
+    .about-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .about p {
+      font-size: 0.975rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1rem;
+    }
+
+    .about p:last-child {
+      font-weight: 500;
+      color: var(--yellow);
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* SUBSCRIBE */
+    .subscribe {
+      background: var(--yellow);
+      padding: 4.5rem 2rem;
+      text-align: center;
+    }
+
+    .subscribe-inner {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .subscribe h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      color: var(--navy);
+    }
+
+    .subscribe-form input[type="email"]::placeholder { color: #999; }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-navy:hover { opacity: 0.85; }
+
+    .subscribe-note {
+      font-size: 0.78rem;
+      color: var(--navy);
+      opacity: 0.65;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      line-height: 1.8;
+    }
+
+    footer p:first-child {
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; gap: 1rem; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy); padding: 1.5rem 2rem; }
+      .nav-toggle { display: block; }
+
+      .hero { padding: 3.5rem 1.5rem 4rem; }
+
+      .issue-grid { grid-template-columns: 1fr; }
+
+      .subscribe-form { flex-direction: column; }
+      .subscribe-form input[type="email"], .btn-navy { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">School Board <span>Weekly</span></a>
+      <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#archive">Issues</a></li>
+        <li><a href="#about">Topics</a></li>
+        <li><a href="#subscribe" class="nav-cta">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-overline">VOLUME 1 | ISSUE 3 | JUNE 16, 2026</p>
+      <h1>This Week in School Board Governance</h1>
+      <p class="hero-sub">The Lead story, three governance takeaways, the best research of the week, and the question your board should be asking.</p>
+      <a href="issues/issue-003.html" class="btn-yellow">Read Issue 3 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="archive" id="archive">
+    <div class="archive-inner">
+      <p class="section-label">All Issues</p>
+      <div class="issue-grid">
+
+        <div class="issue-card">
+          <p class="issue-meta">Issue 3 &mdash; June 16, 2026</p>
+          <h3>Boards Are Running Out of Time on AI</h3>
+          <p class="issue-preview">AI tools are hitting procurement pipelines before most boards have defined what student outcomes they're trying to improve.</p>
+          <a href="issues/issue-003.html" class="issue-link">Read Issue &rarr;</a>
+        </div>
+
+        <div class="issue-card">
+          <p class="issue-meta">Issue 2 &mdash; June 9, 2026</p>
+          <h3>The Governance Data No One Is Collecting</h3>
+          <p class="issue-preview">Most boards vote on budgets without access to outcome trend data. That's not a budget problem.</p>
+          <a href="#" class="issue-link">Read Issue &rarr;</a>
+        </div>
+
+        <div class="issue-card">
+          <p class="issue-meta">Issue 1 &mdash; June 2, 2026</p>
+          <h3>Why School Boards Are Everyone's Problem Now</h3>
+          <p class="issue-preview">The national conversation about school boards has arrived. The governance conversation hasn't.</p>
+          <a href="#" class="issue-link">Read Issue &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <h2>About School Board Weekly</h2>
+      <p>School Board Weekly is an independent publication covering school board governance every week. Each issue includes: The Lead (one major governance story analyzed), Three Things (quick governance takeaways), The Research (one peer-reviewed finding), The Question (one question worth asking your board), and The Link (one resource worth reading).</p>
+      <p>Published every Monday.</p>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe" id="subscribe">
+    <div class="subscribe-inner">
+      <h2>Don't miss an issue.</h2>
+      <form class="subscribe-form" onsubmit="return false;">
+        <input type="email" placeholder="Your email address">
+        <button type="submit" class="btn-navy">Subscribe</button>
+      </form>
+      <p class="subscribe-note">No spam. Governance news, weekly.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>School Board Weekly &mdash; governance coverage that matters</p>
+    <p>&copy; 2026 School Board Weekly</p>
+  </footer>
+
+</body>
+</html>

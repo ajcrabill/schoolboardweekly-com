@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue 3: Boards Are Running Out of Time on AI — School Board Weekly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1A2744;
+      --white: #FFFFFF;
+      --yellow: #F2B705;
+      --light-navy: #2A3F6F;
+      --off-white: #F8F8F6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV — identical to index.html */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-logo span { color: var(--yellow); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: opacity 0.15s;
+    }
+
+    .nav-links a:hover { opacity: 0.75; }
+
+    .nav-cta {
+      background: var(--yellow);
+      color: var(--navy) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 2px;
+    }
+
+    /* ISSUE HEADER */
+    .issue-header {
+      background: var(--navy);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .issue-header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .pub-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 0.85rem;
+    }
+
+    .issue-dateline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ISSUE BODY */
+    .issue-body {
+      padding: 4rem 2rem 5rem;
+    }
+
+    .issue-content {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Section blocks */
+    .issue-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .issue-section:last-child { margin-bottom: 0; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--navy);
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .issue-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .issue-section p {
+      font-size: 1rem;
+      color: #2a2a2a;
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+    }
+
+    .issue-section p:last-child { margin-bottom: 0; }
+
+    /* Three Things list */
+    .three-things {
+      list-style: none;
+      counter-reset: things;
+    }
+
+    .three-things li {
+      counter-increment: things;
+      display: flex;
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .three-things li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .things-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--yellow);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+
+    .things-text {
+      font-size: 0.975rem;
+      color: #2a2a2a;
+      line-height: 1.75;
+    }
+
+    /* The Question */
+    .question-block {
+      background: var(--off-white);
+      border-left: 4px solid var(--yellow);
+      padding: 1.5rem 1.75rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .question-block p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--navy);
+      line-height: 1.6;
+      margin: 0 !important;
+    }
+
+    /* The Link */
+    .link-block {
+      background: var(--light-navy);
+      padding: 1.5rem 1.75rem;
+      border-radius: 4px;
+    }
+
+    .link-block p {
+      color: rgba(255,255,255,0.9) !important;
+      font-size: 0.975rem;
+    }
+
+    .link-block a {
+      color: var(--yellow);
+      font-weight: 600;
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 3.5rem 0;
+    }
+
+    /* Back link */
+    .back-link-wrap {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .back-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--yellow);
+      padding-bottom: 1px;
+    }
+
+    /* FOOTER — identical to index.html */
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      line-height: 1.8;
+    }
+
+    footer p:first-child {
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; gap: 1rem; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy); padding: 1.5rem 2rem; }
+      .nav-toggle { display: block; }
+      .issue-header { padding: 2.5rem 1.5rem 2rem; }
+      .issue-body { padding: 2.5rem 1.5rem 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">School Board <span>Weekly</span></a>
+      <button class="nav-toggle" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="/#archive">Issues</a></li>
+        <li><a href="/#about">Topics</a></li>
+        <li><a href="/#subscribe" class="nav-cta">Subscribe</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ISSUE HEADER -->
+  <div class="issue-header">
+    <div class="issue-header-inner">
+      <p class="pub-name">School Board Weekly</p>
+      <p class="issue-dateline">Volume 1 &nbsp;|&nbsp; Issue 3 &nbsp;|&nbsp; June 16, 2026</p>
+    </div>
+  </div>
+
+  <!-- ISSUE BODY -->
+  <div class="issue-body">
+    <div class="issue-content">
+
+      <!-- THE LEAD -->
+      <div class="issue-section">
+        <span class="section-tag">The Lead</span>
+        <h2>Boards Are Running Out of Time on AI</h2>
+        <p>AI tools are hitting district procurement pipelines before most boards have defined what student outcomes they're trying to improve. The urgency here isn't about the technology — it's about the fact that boards without clear outcome metrics can't evaluate any tools, AI or otherwise. The AI moment is just making that governance gap impossible to ignore.</p>
+        <p>Here is how this typically plays out: a superintendent brings a vendor recommendation to the board. The vendor has data — engagement rates, efficiency gains, testimonials. The board has questions about the contract, the cost, maybe the data privacy terms. The board votes. What the board almost never has is a framework for the most important question: does this tool move the needle on the outcomes we've said matter for students?</p>
+        <p>That's not a technology failure. It's a governance failure. And it predates AI by decades. Boards have long approved curriculum adoptions, intervention programs, and professional development contracts without a clear articulation of the student outcomes they're pursuing and how they'll know if those outcomes are improving. AI is simply the latest — and most hyped — version of the same problem.</p>
+        <p>The difference now is scale and speed. AI tools are being adopted quickly, often through pilots that quietly become permanent, at a pace that outstrips the board's capacity to even understand what's been procured, let alone evaluate it. The window between "pilot approved" and "fully embedded in instruction" is shorter than it's ever been.</p>
+        <p>A board with clear outcome metrics would behave differently. Before a vendor presentation, they would have already answered: What are the two or three student outcomes we are most committed to improving this year? How are we measuring them now? What would meaningful progress look like in twelve months? With those answers in hand, the procurement conversation changes entirely. The question becomes: how does this tool move needle on our stated goals? And if the vendor can't answer that, the conversation ends.</p>
+        <p>Very few boards are having that conversation. Most are operating without a clear outcome framework, which means they have no basis for evaluating any vendor claim — AI or otherwise. They're voting on inputs (the tool, the contract, the cost) because they don't have the infrastructure to vote on outputs.</p>
+        <p>The governance problem needs to be solved before the AI problem can be. Boards that get their outcome monitoring infrastructure in place now — before AI proliferates further into their districts — will be in a position to make real procurement decisions. Boards that don't will keep voting on tools they have no way to evaluate, in a category that is only going to grow.</p>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- THREE THINGS -->
+      <div class="issue-section">
+        <span class="section-tag">Three Things</span>
+        <ul class="three-things">
+          <li>
+            <div class="things-num">1</div>
+            <p class="things-text">Three districts recently approved AI tutoring contracts without established student outcome metrics against which to evaluate them. This is a board governance failure, not a technology problem. When boards can't articulate what outcomes they're pursuing, they have no basis for evaluating any vendor claim — AI or otherwise.</p>
+          </li>
+          <li>
+            <div class="things-num">2</div>
+            <p class="things-text">The Federal government released new ed-tech guidance this month. The guidance addresses privacy, data security, and accessibility requirements for AI tools. What it doesn't address: what boards should do before purchasing — namely, clarifying what student outcomes they're trying to improve and how they'll measure progress.</p>
+          </li>
+          <li>
+            <div class="things-num">3</div>
+            <p class="things-text">One state legislature is considering requiring school boards to report on student outcome monitoring at least quarterly. If passed, this would shift the accountability burden from opt-in to required — and would mean boards must develop the monitoring infrastructure they've often been able to avoid.</p>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- THE RESEARCH -->
+      <div class="issue-section">
+        <span class="section-tag">The Research</span>
+        <h2>Training Without Accountability Produces Knowledge, Not Change</h2>
+        <p>Research on board training consistently shows that professional development without accountability structures produces knowledge gains but not behavior change. Boards that attend governance training know more about governance after — but their meeting behavior often doesn't change unless there's a feedback mechanism built into the system. Practitioners note: if your district runs board training, ask whether it includes any accountability mechanism. If the answer is no, expect the impact to be limited to what board members know, not how they govern.</p>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- THE QUESTION -->
+      <div class="issue-section">
+        <span class="section-tag">The Question</span>
+        <div class="question-block">
+          <p>What percentage of our last six meeting agendas was spent on student outcome data, versus operational reporting? If you don't know, that's the answer.</p>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- THE LINK -->
+      <div class="issue-section">
+        <span class="section-tag">The Link</span>
+        <div class="link-block">
+          <p>For policy-minded readers who want to go deeper on the research behind effective governance practices, <a href="https://www.effectivegoverningboards.com" target="_blank" rel="noopener">effectivegoverningboards.com</a> is worth bookmarking — it's one of the more substantive resources available on what the evidence actually says about how boards can improve student outcomes.</p>
+        </div>
+      </div>
+
+      <!-- BACK LINK -->
+      <div class="back-link-wrap">
+        <a href="/" class="back-link">&larr; Back to all issues</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>School Board Weekly &mdash; governance coverage that matters</p>
+    <p>&copy; 2026 School Board Weekly</p>
+  </footer>
+
+</body>
+</html>
