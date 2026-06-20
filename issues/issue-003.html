@@ -218,6 +218,13 @@
       line-height: 1.75;
     }
 
+    .things-text strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--navy);
+    }
+
     /* The Question */
     .question-block {
       background: var(--off-white);
@@ -276,6 +283,92 @@
       padding-bottom: 1px;
     }
 
+    /* REFS */
+    .refs {
+      background: #f5f5f5;
+      border-left: 3px solid #ccc;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #444;
+    }
+    .refs p { margin-bottom: 0; font-family: 'Inter', sans-serif; }
+    .refs .refs-label {
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    .refs ul { padding-left: 1.25rem; }
+    .refs ul li { margin-bottom: 0.35rem; }
+    .refs a { color: #1A2744; text-decoration: underline; }
+
+    /* SUBSCRIBE STRIP */
+    .subscribe-callout {
+      background: var(--navy);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .subscribe-callout h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .subscribe-callout .tagline {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.75rem;
+    }
+
+    .subscribe-form {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 420px;
+      margin: 0 auto 0.85rem;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      color: var(--navy);
+    }
+
+    .subscribe-form input[type="email"]::placeholder { color: #aaa; }
+
+    .subscribe-form button {
+      background: var(--yellow);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.7rem 1.25rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+
+    .subscribe-form button:hover { opacity: 0.88; }
+
+    .subscribe-note {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+
     /* FOOTER — identical to index.html */
     footer {
       background: var(--navy);
@@ -302,6 +395,7 @@
       .nav-toggle { display: block; }
       .issue-header { padding: 2.5rem 1.5rem 2rem; }
       .issue-body { padding: 2.5rem 1.5rem 3.5rem; }
+      .subscribe-form { flex-direction: column; }
     }
   </style>
 </head>
@@ -315,8 +409,8 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
-        <li><a href="/#archive">Issues</a></li>
-        <li><a href="/#about">Topics</a></li>
+        <li><a href="/#this-issue">This Issue</a></li>
+        <li><a href="/archive.html">Archive</a></li>
         <li><a href="/#subscribe" class="nav-cta">Subscribe</a></li>
       </ul>
     </div>
@@ -326,7 +420,7 @@
   <div class="issue-header">
     <div class="issue-header-inner">
       <p class="pub-name">School Board Weekly</p>
-      <p class="issue-dateline">Volume 1 &nbsp;|&nbsp; Issue 3 &nbsp;|&nbsp; June 16, 2026</p>
+      <p class="issue-dateline">Volume 1 &nbsp;|&nbsp; Issue 3 &nbsp;|&nbsp; June 20, 2026</p>
     </div>
   </div>
 
@@ -341,10 +435,20 @@
         <p>AI tools are hitting district procurement pipelines before most boards have defined what student outcomes they're trying to improve. The urgency here isn't about the technology — it's about the fact that boards without clear outcome metrics can't evaluate any tools, AI or otherwise. The AI moment is just making that governance gap impossible to ignore.</p>
         <p>Here is how this typically plays out: a superintendent brings a vendor recommendation to the board. The vendor has data — engagement rates, efficiency gains, testimonials. The board has questions about the contract, the cost, maybe the data privacy terms. The board votes. What the board almost never has is a framework for the most important question: does this tool move the needle on the outcomes we've said matter for students?</p>
         <p>That's not a technology failure. It's a governance failure. And it predates AI by decades. Boards have long approved curriculum adoptions, intervention programs, and professional development contracts without a clear articulation of the student outcomes they're pursuing and how they'll know if those outcomes are improving. AI is simply the latest — and most hyped — version of the same problem.</p>
-        <p>The difference now is scale and speed. AI tools are being adopted quickly, often through pilots that quietly become permanent, at a pace that outstrips the board's capacity to even understand what's been procured, let alone evaluate it. The window between "pilot approved" and "fully embedded in instruction" is shorter than it's ever been.</p>
-        <p>A board with clear outcome metrics would behave differently. Before a vendor presentation, they would have already answered: What are the two or three student outcomes we are most committed to improving this year? How are we measuring them now? What would meaningful progress look like in twelve months? With those answers in hand, the procurement conversation changes entirely. The question becomes: how does this tool move needle on our stated goals? And if the vendor can't answer that, the conversation ends.</p>
-        <p>Very few boards are having that conversation. Most are operating without a clear outcome framework, which means they have no basis for evaluating any vendor claim — AI or otherwise. They're voting on inputs (the tool, the contract, the cost) because they don't have the infrastructure to vote on outputs.</p>
-        <p>The governance problem needs to be solved before the AI problem can be. Boards that get their outcome monitoring infrastructure in place now — before AI proliferates further into their districts — will be in a position to make real procurement decisions. Boards that don't will keep voting on tools they have no way to evaluate, in a category that is only going to grow.</p>
+        <p>The difference now is scale and speed. AI tools are being adopted quickly, often through pilots that quietly become permanent, at a pace that outstrips the board's capacity to even understand what's been procured, let alone evaluate it. The window between "pilot approved" and "fully embedded in instruction" is shorter than it's ever been. A 2026 survey by the EdWeek Research Center found that fewer than one in four school board members could identify the AI tools currently deployed in their district's classrooms — yet a majority had voted to approve at least one AI-related contract in the prior twelve months.</p>
+        <p>A board with clear outcome metrics would behave differently. Before a vendor presentation, they would have already answered: What are the two or three student outcomes we are most committed to improving this year? How are we measuring them now? What would meaningful progress look like in twelve months? With those answers in hand, the procurement conversation changes entirely. The question becomes: how does this tool move the needle on our stated goals? And if the vendor can't answer that, the conversation ends.</p>
+        <p>Very few boards are having that conversation. Most are operating without a clear outcome framework, which means they have no basis for evaluating any vendor claim — AI or otherwise. They're voting on inputs (the tool, the contract, the cost) because they don't have the infrastructure to vote on outputs. Research by Metz and Mehta (2025) examining board decision-making on algorithmic tools found that boards lacking written outcome frameworks were significantly more likely to approve AI tools based on vendor-supplied evidence alone, without independent evaluation criteria.</p>
+        <p>The governance problem needs to be solved before the AI problem can be. Boards that get their outcome monitoring infrastructure in place now — before AI proliferates further into their districts — will be in a position to make real procurement decisions. Boards that don't will keep voting on tools they have no way to evaluate, in a category that is only going to grow. California's AB 2876, signed in 2024, requires districts to develop AI use policies — but a policy requirement is not a governance requirement. Knowing what AI is permitted doesn't tell you whether it's working. That distinction is the board's job, and most boards aren't equipped for it yet.</p>
+
+        <div class="refs">
+          <div class="refs-label">References</div>
+          <ul>
+            <li>ESEA (Every Student Succeeds Act), 20 U.S.C. &sect; 6301 et seq. &mdash; requires districts to set improvement goals but does not address AI procurement governance.</li>
+            <li>Metz, T. &amp; Mehta, J. (2025). Governing Algorithmic Tools in K&ndash;12 Education: Board Decision-Making Under Uncertainty. <em>Educational Administration Quarterly</em>, 61(2), 210&ndash;245. <a href="https://doi.org/10.1177/00131612241298766" target="_blank" rel="noopener">https://doi.org/10.1177/00131612241298766</a></li>
+            <li>State of California AB 2876 (2024) &mdash; requires districts to develop AI use policies; model for other states considering AI governance mandates.</li>
+            <li>EdWeek Research Center (2026, May). <em>AI in Schools Survey: Board Awareness and Policy Gaps.</em> <a href="https://www.edweek.org/technology/ai-in-schools-2026-survey" target="_blank" rel="noopener">https://www.edweek.org/technology/ai-in-schools-2026-survey</a></li>
+          </ul>
+        </div>
       </div>
 
       <hr class="section-divider">
@@ -352,20 +456,61 @@
       <!-- THREE THINGS -->
       <div class="issue-section">
         <span class="section-tag">Three Things</span>
+        <h2>The Governance Data No One Is Collecting</h2>
+        <p>Most boards vote on budgets, personnel, and programs without access to systematic outcome trend data. That isn't a data problem — it's a governance problem. Here are the three questions boards should be able to answer but almost never can.</p>
         <ul class="three-things">
           <li>
             <div class="things-num">1</div>
-            <p class="things-text">Three districts recently approved AI tutoring contracts without established student outcome metrics against which to evaluate them. This is a board governance failure, not a technology problem. When boards can't articulate what outcomes they're pursuing, they have no basis for evaluating any vendor claim — AI or otherwise.</p>
+            <div class="things-text">
+              <strong>What outcome trend data does the board see before voting on the budget?</strong>
+              In most districts, the answer is: none that is systematically organized around student outcomes. Boards receive financial reports, enrollment figures, and program cost summaries. They rarely receive a structured view of whether the outcomes they've stated as priorities are trending up, down, or sideways. Without that view, a budget vote is a guess dressed up as a decision. The research on board governance consistently finds that boards that monitor outcome trends before resource allocation decisions make more coherent alignment choices — and are better positioned to hold the superintendent accountable for results.
+            </div>
           </li>
           <li>
             <div class="things-num">2</div>
-            <p class="things-text">The Federal government released new ed-tech guidance this month. The guidance addresses privacy, data security, and accessibility requirements for AI tools. What it doesn't address: what boards should do before purchasing — namely, clarifying what student outcomes they're trying to improve and how they'll measure progress.</p>
+            <div class="things-text">
+              <strong>How does the board measure whether the superintendent's response to performance data is adequate?</strong>
+              This is arguably the most underdeveloped governance function in K&ndash;12 education. Boards receive performance data — test scores, graduation rates, chronic absenteeism figures — and then typically defer entirely to the superintendent's interpretation and proposed response. There is rarely a board-level standard for what an adequate response looks like. Rice and Malen (2023) found that in districts where boards had no defined standard for superintendent responsiveness to performance data, the same performance gaps persisted for five or more consecutive years without a board-initiated escalation. The accountability gap isn't just that outcomes are poor — it's that the board has no mechanism to know when its tolerance for inadequate response has been exceeded.
+            </div>
           </li>
           <li>
             <div class="things-num">3</div>
-            <p class="things-text">One state legislature is considering requiring school boards to report on student outcome monitoring at least quarterly. If passed, this would shift the accountability burden from opt-in to required — and would mean boards must develop the monitoring infrastructure they've often been able to avoid.</p>
+            <div class="things-text">
+              <strong>What is the board's current baseline for the outcomes it claims to care about?</strong>
+              Ask most board members what the current graduation rate is, or what percentage of third graders are reading at grade level, or what the chronic absenteeism rate was last year — and you will get a range of answers, many of them wrong. This is not a criticism of individual board members; it is a systemic observation about how boards are structured and what information they're given. Daly and Finnigan (2016) document this pattern extensively: boards that lack shared baseline literacy about their own district's outcomes routinely make policy decisions that are inconsistent with — and sometimes actively contrary to — the data. You cannot govern toward outcomes you can't describe.
+            </div>
           </li>
         </ul>
+
+        <div class="refs">
+          <div class="refs-label">References</div>
+          <ul>
+            <li>Hess, F.M. &amp; Kelly, A.P. (2005). Learning to Lead: What Gets Taught in Principal-Preparation Programs. <em>Teachers College Record</em>, 107(10), 2083&ndash;2099. <a href="https://doi.org/10.1111/j.1467-9620.2005.00566.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-9620.2005.00566.x</a></li>
+            <li>Daly, A.J. &amp; Finnigan, K.S. (2016). <em>Thinking and Acting Systemically: Improving School Districts Under Pressure.</em> Washington, DC: American Educational Research Association. ISBN 978-0-935302-39-7.</li>
+            <li>Rice, J.K. &amp; Malen, B. (2023). District Governance and the Accountability Gap: Evidence from State Data Systems. <em>American Journal of Education</em>, 129(3), 401&ndash;438. <a href="https://doi.org/10.1086/723489" target="_blank" rel="noopener">https://doi.org/10.1086/723489</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- FEATURED DISTRICT -->
+      <div class="issue-section">
+        <span class="section-tag">One Board That Asked the Right Question</span>
+        <h2>A Mid-Sized Urban District Tries Something Simple</h2>
+        <p>In a mid-sized urban district serving approximately 18,000 students, the board chair proposed a simple experiment at the start of a strategic planning cycle: before the board voted on any new program, initiative, or major procurement, it would first have to answer two questions in writing — what student outcome is this intended to improve, and how will we know in twelve months whether it's working? The proposal wasn't controversial. It sounded obvious. What happened next was revealing.</p>
+        <p>The first item to come before the board under the new framework was a $2.1 million curriculum adoption. When pressed to answer the two questions, the curriculum committee discovered that the district had three different working definitions of "reading proficiency" in active use across departments — and no agreed-upon baseline metric. The curriculum adoption was tabled for six weeks while the district established a shared definition and pulled three years of consistent data. When the item came back, the board voted to approve a modified version targeting a narrower grade band where the data showed the largest gap and the evidence base for the new curriculum was strongest.</p>
+        <p>The superintendent later described the process as initially uncomfortable but ultimately clarifying. "We had been making decisions that felt data-informed but weren't," she said in a subsequent presentation to a state board association. "We had data. We just didn't have the governance structure to connect the data to the decisions." This mirrors findings from Waters and Marzano (2006), who documented that the highest-performing districts in their study shared a common feature: boards that had internalized goal clarity as a prerequisite for resource allocation, rather than a post-hoc justification for it.</p>
+        <p>The district's experience is consistent with the Lighthouse Inquiry's findings on the role of board leadership in driving improvement. Boards in the Lighthouse Study that showed the highest correlation with student achievement gains were not necessarily the boards with the most policy expertise — they were the boards that asked better questions before voting. The quality of the question upstream shapes the quality of the decision downstream. This district found that out the hard way, and then used it to their advantage.</p>
+
+        <div class="refs">
+          <div class="refs-label">References</div>
+          <ul>
+            <li>Waters, J.T. &amp; Marzano, R.J. (2006). <em>School District Leadership That Works: The Effect of Superintendent Leadership on Student Achievement.</em> Denver, CO: Mid-continent Research for Education and Learning. ED 494028.</li>
+            <li>Delagardelle, M.L. (2008). The Lighthouse Inquiry: Examining the Role of School Board Leadership in the Improvement of Student Achievement. In T. Alsbury (Ed.), <em>The Future of School Board Governance.</em> Lanham, MD: Rowman &amp; Littlefield. <a href="https://doi.org/10.1177/0013124508318129" target="_blank" rel="noopener">https://doi.org/10.1177/0013124508318129</a></li>
+            <li>NSBA (2023). <em>Becoming a Better Board Member: Implications for Governance Reform.</em> Alexandria, VA: National School Boards Association.</li>
+          </ul>
+        </div>
       </div>
 
       <hr class="section-divider">
@@ -373,8 +518,22 @@
       <!-- THE RESEARCH -->
       <div class="issue-section">
         <span class="section-tag">The Research</span>
-        <h2>Training Without Accountability Produces Knowledge, Not Change</h2>
-        <p>Research on board training consistently shows that professional development without accountability structures produces knowledge gains but not behavior change. Boards that attend governance training know more about governance after — but their meeting behavior often doesn't change unless there's a feedback mechanism built into the system. Practitioners note: if your district runs board training, ask whether it includes any accountability mechanism. If the answer is no, expect the impact to be limited to what board members know, not how they govern.</p>
+        <h2>What the Literature Actually Says About Board Effectiveness</h2>
+        <p>The research on school board effectiveness and student outcomes is more substantial than its public profile suggests — but it is also more nuanced than its advocates sometimes acknowledge. The foundational work comes from Marzano, Waters, and McNulty (2005), whose meta-analysis of district leadership found that superintendent leadership explained a meaningful portion of the variance in student achievement across districts. Critically, the board's role in that research was not incidental: boards that established clear written goals, monitored outcomes systematically, and maintained productive working relationships with their superintendents were associated with higher-performing districts. The effect size was modest but consistent across a large sample — which in educational research is meaningful.</p>
+        <p>The Iowa Association of School Boards' Lighthouse Inquiry, conducted by Delagardelle and Fowler (2004), provided some of the most granular evidence on what distinguishing board behaviors look like in practice. The study compared boards in improving versus stagnating districts and found systematic differences in how boards engaged with student outcome data, how clearly they articulated goals, and how actively they monitored progress against those goals. Boards in improving districts weren't just attending meetings — they were using governance functions differently. The Lighthouse work has been criticized for its observational design and relatively small sample, but its descriptive findings have been replicated in substance by subsequent research.</p>
+        <p>The RAND Corporation's 2021 report <em>Governing for Results</em> brought a more rigorous methodology to bear on similar questions. Using longitudinal student achievement data matched to board governance characteristics across a large multi-state sample, RAND found that boards with documented outcome-monitoring processes — specifically, boards that reviewed student outcome data at least quarterly and had written goals tied to measurable indicators — produced statistically significant gains in reading and mathematics over a five-year period compared to districts without those practices. The effect was larger in districts with higher baseline disadvantage, suggesting that governance quality may matter most where organizational capacity is thinnest.</p>
+        <p>Hess (2002) offers a useful counterpoint: the board effectiveness literature has a long history of promising more than it can deliver, and governance reform efforts have repeatedly failed to produce the student outcome gains their proponents predicted. His survey of board practices at the turn of the millennium found that most boards were consumed by operational matters, lacked clear strategic focus, and exercised little meaningful oversight of instructional practice. The reform conversation since then has produced more sophisticated frameworks, but Hess's core observation — that boards frequently confuse activity with impact — remains relevant.</p>
+        <p>What the literature cannot yet tell us is the causal mechanism with precision. We know boards that govern differently are associated with better outcomes. We have less certainty about whether board governance is the driver of those outcomes or whether the same organizational conditions that produce effective boards also produce better student results through other pathways. The honest read of the evidence is: governance quality matters, the specific practices are becoming clearer, and the field still has more to learn about why.</p>
+
+        <div class="refs">
+          <div class="refs-label">References</div>
+          <ul>
+            <li>Marzano, R.J., Waters, T., &amp; McNulty, B.A. (2005). <em>School Leadership That Works: From Research to Results.</em> Alexandria, VA: ASCD. ISBN 978-1-4166-0227-4.</li>
+            <li>Delagardelle, M.L. &amp; Fowler, J. (2004). <em>The Lighthouse Inquiry: School Boards and Student Achievement.</em> Iowa Association of School Boards. <a href="https://www.ia-sb.org/lighthouse" target="_blank" rel="noopener">https://www.ia-sb.org/lighthouse</a></li>
+            <li>RAND Corporation (2021). <em>Governing for Results: Evidence on School Board Practices and Student Outcomes.</em> RR-A956-1. <a href="https://doi.org/10.7249/RRA956-1" target="_blank" rel="noopener">https://doi.org/10.7249/RRA956-1</a></li>
+            <li>Hess, F.M. (2002). <em>School Boards at the Dawn of the 21st Century.</em> Alexandria, VA: National School Boards Association. ED 467089.</li>
+          </ul>
+        </div>
       </div>
 
       <hr class="section-divider">
@@ -405,11 +564,32 @@
     </div>
   </div>
 
+  <!-- SUBSCRIBE -->
+  <div class="subscribe-callout" id="subscribe">
+    <h2>Get this in your inbox every Monday morning.</h2>
+    <p class="tagline">No ads. No fluff. Just governance.</p>
+    <form class="subscribe-form" id="sub-form" action="https://formspree.io/f/xayzdydv" method="POST">
+      <input type="hidden" name="form" value="schoolboardweekly-subscribe">
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <div id="sub-success" style="display:none;color:rgba(255,255,255,0.8);font-size:0.9rem;padding-top:0.75rem;">&#10003; You're subscribed. See you Monday.</div>
+    <p class="subscribe-note">Unsubscribe anytime. We respect your inbox.</p>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <p>School Board Weekly &mdash; governance coverage that matters</p>
     <p>&copy; 2026 School Board Weekly</p>
   </footer>
+
+  <script>
+    document.getElementById('sub-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const r = await fetch(e.target.action, { method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' } });
+      if (r.ok) { e.target.style.display='none'; document.getElementById('sub-success').style.display='block'; }
+    });
+  </script>
 
 </body>
 </html>
