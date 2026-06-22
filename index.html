@@ -77,14 +77,14 @@ description: "School Board Weekly: independent coverage of school board governan
       <p class="subscribe-note">Unsubscribe anytime. We respect your inbox.</p>
     </div>
 
-    <!-- PAST ISSUES -->
+        <!-- PAST ISSUES -->
     <div class="section-head" id="past-issues">
       <span class="label">Previous Issues</span>
       <div class="rule"></div>
     </div>
 
     <div class="past-issues">
-      <table>
+      <table id="past-issues-table">
         <thead>
           <tr>
             <th>Issue</th>
@@ -93,55 +93,8 @@ description: "School Board Weekly: independent coverage of school board governan
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="td-num">#8</td>
-            <td class="td-date">July 21, 2026</td>
-            <td class="td-title">Who's Running This Meeting? The Quiet Power of an Effective Board Chair</td>
-            <td class="td-link"><a href="issues/issue-008.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#7</td>
-            <td class="td-date">July 14, 2026</td>
-            <td class="td-title">Who Controls the Budget? The Board's Role in Fiscal Governance</td>
-            <td class="td-link"><a href="issues/issue-007.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#6</td>
-            <td class="td-date">July 7, 2026</td>
-            <td class="td-title">When the Board Changes</td>
-            <td class="td-link"><a href="issues/issue-006.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#5</td>
-            <td class="td-date">June 30, 2026</td>
-            <td class="td-title">When Board Members Have a Stake in the Outcome</td>
-            <td class="td-link"><a href="issues/issue-005.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#4</td>
-            <td class="td-date">June 23, 2026</td>
-            <td class="td-title">When Boards Actually Track What Matters</td>
-            <td class="td-link"><a href="issues/issue-004.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#3</td>
-            <td class="td-date">June 16, 2026</td>
-            <td class="td-title">Boards Are Running Out of Time on AI</td>
-            <td class="td-link"><a href="issues/issue-003.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#2</td>
-            <td class="td-date">June 9, 2026</td>
-            <td class="td-title">The Governance Data No One Is Collecting</td>
-            <td class="td-link"><a href="issues/issue-002.html">Read &rarr;</a></td>
-          </tr>
-          <tr>
-            <td class="td-num">#1</td>
-            <td class="td-date">June 2, 2026</td>
-            <td class="td-title">Why School Boards Are Everyone's Problem Now</td>
-            <td class="td-link"><a href="issues/issue-001.html">Read &rarr;</a></td>
-          </tr>
+        <tbody id="past-issues-body">
+          <tr><td colspan="4" style="color:#888;font-size:0.9rem;padding:1rem 0">Loading&hellip;</td></tr>
         </tbody>
       </table>
     </div>
@@ -149,10 +102,39 @@ description: "School Board Weekly: independent coverage of school board governan
   </div><!-- /.main -->
 
   <script>
+    // Subscribe form
     var f=document.getElementById("sub-form");
     if(f) f.addEventListener("submit",async function(e){
       e.preventDefault();
       var r=await fetch(f.action,{method:"POST",body:new FormData(f),headers:{"Accept":"application/json"}});
       if(r.ok){f.style.display="none";document.getElementById("sub-success").style.display="block";}
     });
+
+    // Dynamic past-issues table — only shows issues present in manifest.json
+    (async function() {
+      var tbody = document.getElementById("past-issues-body");
+      try {
+        var resp = await fetch("issues/manifest.json?t=" + Date.now());
+        if (!resp.ok) throw new Error("manifest not found");
+        var issues = await resp.json();
+        // Filter out current issue (the one in the header strip)
+        var currentHref = document.querySelector(".issue-strip a.read-btn");
+        var currentUrl = currentHref ? currentHref.getAttribute("href") : "";
+        var past = issues.filter(function(i) { return i.url !== currentUrl; });
+        if (past.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='4' style='color:#888;font-size:0.9rem;padding:1rem 0'>No previous issues yet.</td></tr>";
+          return;
+        }
+        tbody.innerHTML = past.map(function(i) {
+          return "<tr>" +
+            "<td class='td-num'>#" + i.issue + "</td>" +
+            "<td class='td-date'>" + (i.date || "") + "</td>" +
+            "<td class='td-title'>" + i.headline + "</td>" +
+            "<td class='td-link'><a href='" + i.url + "'>Read &rarr;</a></td>" +
+            "</tr>";
+        }).join("");
+      } catch(e) {
+        tbody.innerHTML = "<tr><td colspan='4' style='color:#888;font-size:0.9rem;padding:1rem 0'>Could not load issues.</td></tr>";
+      }
+    })();
   </script>
