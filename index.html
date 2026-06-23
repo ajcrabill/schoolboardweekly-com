@@ -77,14 +77,14 @@ description: "School Board Weekly: independent coverage of school board governan
       <p class="subscribe-note">Unsubscribe anytime. We respect your inbox.</p>
     </div>
 
-        <!-- PAST ISSUES -->
+    <!-- PAST ISSUES -->
     <div class="section-head" id="past-issues">
       <span class="label">Previous Issues</span>
       <div class="rule"></div>
     </div>
 
     <div class="past-issues">
-      <table id="past-issues-table">
+      <table>
         <thead>
           <tr>
             <th>Issue</th>
@@ -93,8 +93,16 @@ description: "School Board Weekly: independent coverage of school board governan
             <th></th>
           </tr>
         </thead>
-        <tbody id="past-issues-body">
-          <tr><td colspan="4" style="color:#888;font-size:0.9rem;padding:1rem 0">Loading&hellip;</td></tr>
+        <tbody>
+          {% assign all_issues = site.pages | where: "layout", "issue" | sort: "url" | reverse %}
+          {% for issue in all_issues %}
+          <tr>
+            <td class="td-num">#{{ issue.issue_number }}</td>
+            <td class="td-date">{{ issue.date_display }}</td>
+            <td class="td-title">{{ issue.title }}</td>
+            <td class="td-link"><a href="{{ issue.url }}">Read &rarr;</a></td>
+          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -102,39 +110,10 @@ description: "School Board Weekly: independent coverage of school board governan
   </div><!-- /.main -->
 
   <script>
-    // Subscribe form
     var f=document.getElementById("sub-form");
     if(f) f.addEventListener("submit",async function(e){
       e.preventDefault();
       var r=await fetch(f.action,{method:"POST",body:new FormData(f),headers:{"Accept":"application/json"}});
       if(r.ok){f.style.display="none";document.getElementById("sub-success").style.display="block";}
     });
-
-    // Dynamic past-issues table — only shows issues present in manifest.json
-    (async function() {
-      var tbody = document.getElementById("past-issues-body");
-      try {
-        var resp = await fetch("issues/manifest.json?t=" + Date.now());
-        if (!resp.ok) throw new Error("manifest not found");
-        var issues = await resp.json();
-        // Filter out current issue (the one in the header strip)
-        var currentHref = document.querySelector(".issue-strip a.read-btn");
-        var currentUrl = currentHref ? currentHref.getAttribute("href") : "";
-        var past = issues.filter(function(i) { return i.url !== currentUrl; });
-        if (past.length === 0) {
-          tbody.innerHTML = "<tr><td colspan='4' style='color:#888;font-size:0.9rem;padding:1rem 0'>No previous issues yet.</td></tr>";
-          return;
-        }
-        tbody.innerHTML = past.map(function(i) {
-          return "<tr>" +
-            "<td class='td-num'>#" + i.issue + "</td>" +
-            "<td class='td-date'>" + (i.date || "") + "</td>" +
-            "<td class='td-title'>" + i.headline + "</td>" +
-            "<td class='td-link'><a href='" + i.url + "'>Read &rarr;</a></td>" +
-            "</tr>";
-        }).join("");
-      } catch(e) {
-        tbody.innerHTML = "<tr><td colspan='4' style='color:#888;font-size:0.9rem;padding:1rem 0'>Could not load issues.</td></tr>";
-      }
-    })();
   </script>
